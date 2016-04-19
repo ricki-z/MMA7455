@@ -23,7 +23,7 @@
 // The accuracy is 10-bits.
 //
 
-#include "MMA7455.h"
+#include <MMA7455.h>
 
 MMA7455 my_mma;
 
