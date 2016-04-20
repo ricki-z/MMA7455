@@ -1,14 +1,16 @@
 // MMA7455 Accelerometer
 // ---------------------
 //
-// By arduino.cc user "Krodal".
+// Library by R. Zschiegner (rz@madavi.de)
+//
+// Based on example by arduino.cc user "Krodal".
 // May 2012
 // Open Source / Public Domain
 //
-// Fixes to union and type conversions by Arduino.cc user "Afroviking"
+// Fixes to union and type conversions by arduino.cc user "Afroviking"
 // August 2014
 //
-// Using Arduino 1.0.1
+// Using Arduino >= 1.0.1
 // It will not work with an older version, since Wire.endTransmission()
 // uses a parameter to hold or release the I2C bus.
 //

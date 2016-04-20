@@ -1,27 +1,8 @@
-// MMA7455 Accelerometer
-// ---------------------
+// MMA7455 Accelerometer example
+// -----------------------------
 //
-// By arduino.cc user "Krodal".
-// May 2012
-// Open Source / Public Domain
-//
-// Fixes to union and type conversions by Arduino.cc user "Afroviking"
-// August 2014
-//
-// Using Arduino 1.0.1
-// It will not work with an older version, since Wire.endTransmission()
-// uses a parameter to hold or release the I2C bus.
-//
-// Documentation:
-//     - The Freescale MMA7455L datasheet
-//     - The AN3468 Application Note (programming).
-//     - The AN3728 Application Note (calibrating offset).
-//
-// The MMA7455 can be used by writing and reading a single byte,
-// but it is also capable to read and write multiple bytes.
-//
-// The accuracy is 10-bits.
-//
+// By R. Zschiegner (rz@madavi.de).
+// April 2016
 
 #include <MMA7455.h>
 
@@ -29,10 +10,25 @@ MMA7455 my_mma;
 
 void setup()
 {
+  uint8_t c;
+
   Serial.begin(9600);
   Serial.println("Freescale MMA7455 accelerometer");
   Serial.println("May 2012");
   my_mma.begin(D3,D4);
+
+  // Read the Status Register
+  my_mma.read(MMA7455_STATUS, &c, 1);
+  Serial.print("Status: "); Serial.println(c);
+
+  // Read the "Who am I" value
+  my_mma.read(MMA7455_WHOAMI, &c, 1);
+  Serial.print("WhoAmI: "); Serial.println(c);
+
+  // Read the optional temperature output value (I always read zero)
+  my_mma.read(MMA7455_TOUT, &c, 1);
+  Serial.print("Temp.: "); Serial.println(c);
+
 }
 
 
