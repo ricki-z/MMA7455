@@ -8,12 +8,12 @@ Arduino library for Freescale accelerometer MMA7455
 MMA7455();  
   
 * start object  
-For non Arduino boards
+For non Arduino boards  
 void begin(uint8_t pin_sda, uint8_t pin_scl);  
   
 For Arduino boards  
 void begin();  
-
+  
 * read x-, y-, z- acceleration  
 int xyz(uint16_t *pX, uint16_t *pY, uint16_t *pZ);  
   
