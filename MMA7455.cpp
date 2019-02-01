@@ -46,7 +46,7 @@ MMA7455::MMA7455(void) {
 
 int MMA7455_read(int start, uint8_t *buffer, int size)
 {
-  int i, n, error;
+  int i, n;
 
   Wire.beginTransmission(MMA7455_I2C_ADDRESS);
   n = Wire.write(start);
@@ -294,15 +294,23 @@ int MMA7455_init(void)
   return (0);          // return : no error
 }
 
+#if defined __AVR__
+void MMA7455::begin() {
+#else
 void MMA7455::begin(uint8_t pin_sda, uint8_t pin_scl) {
+#endif
   int error;
   uint8_t c;
 
+#if defined __AVR__
+  Wire.begin();
+#else
   _pin_sda = pin_sda;
   _pin_scl = pin_scl;
 
   // Initialize the 'Wire' class for I2C-bus communication.
   Wire.begin(_pin_sda,_pin_scl);
+#endif
 
   // Initialize the MMA7455, and set the offset.
   error = MMA7455_init();

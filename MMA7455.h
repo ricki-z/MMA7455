@@ -142,7 +142,7 @@
 // Both have the lower byte at the lower address,
 // so they match.
 // This union is only used by the low level functions.
-typedef union xyz_union
+union xyz_union
 {
   struct
   {
@@ -165,7 +165,11 @@ typedef union xyz_union
 class MMA7455 {
 	public:
 		MMA7455();
+#if defined __AVR__
+		void begin();
+#else
 		void begin(uint8_t pin_sda, uint8_t pin_scl);
+#endif
 		int init(void);
 		int xyz(uint16_t *pX, uint16_t *pY, uint16_t *pZ);
 		int read(int start, uint8_t *buffer, int size);

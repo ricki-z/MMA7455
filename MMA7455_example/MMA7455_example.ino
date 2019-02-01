@@ -4,7 +4,7 @@
 // By R. Zschiegner (rz@madavi.de).
 // April 2016
 
-#include <MMA7455.h>
+#include "MMA7455.h"
 
 MMA7455 my_mma;
 
@@ -15,7 +15,12 @@ void setup()
   Serial.begin(9600);
   Serial.println("Freescale MMA7455 accelerometer");
   Serial.println("May 2012");
-  my_mma.begin(D3,D4);
+  
+#if defined __AVR__
+  my_mma.begin();				// use predefined I2C pins
+#else
+  my_mma.begin(D3,D4);			// for esp8266 and esp32 set pins to those used by your project
+#endif
 
   // Read the Status Register
   my_mma.read(MMA7455_STATUS, &c, 1);
